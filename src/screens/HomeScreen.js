@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Helmet from 'react-helmet'
 import {
   Container,
@@ -15,98 +15,12 @@ import {
   TableRow,
   Box,
   Fade,
-  Input,
 } from '@material-ui/core'
 import DeleteIcon from '@mui/icons-material/Delete'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import Footer from '../components/Footer'
 import { DropzoneDialog } from 'material-ui-dropzone'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    textAlign: 'center',
-  },
-
-  dropZone: {
-    width: 900,
-  },
-
-  // Container
-  filesCont: {
-    margin: 'auto',
-    marginTop: 60,
-    padding: '2rem',
-    boxShadow: 'rgba(0, 0, 0, 0.15) 0px 5px 15px 0px',
-    backgroundColor: 'white',
-    borderRadius: 2,
-    [theme.breakpoints.up('xs')]: {
-      width: '90%',
-    },
-    [theme.breakpoints.up('sm')]: {
-      width: '50%',
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '50%',
-    },
-    [theme.breakpoints.up('xl')]: {
-      width: '80%',
-    },
-  },
-
-  // Title
-  headGrid: {
-    textAlign: 'center',
-    margin: 'auto',
-    width: '80%',
-  },
-
-  // Table
-  insideDiv: {
-    minHeight: '30rem',
-  },
-  row: {
-    borderColor: '#f2f2f2',
-  },
-  downIcon: {
-    color: '#007E33',
-    marginRight: 20,
-  },
-  trashIcon: {
-    color: '#CC0000',
-    cursor: 'pointer',
-  },
-  upBtn: {
-    backgroundColor: '#007bff',
-    color: 'white',
-    padding: '.5rem',
-  },
-  upBtnBox: {
-    textAlign: 'right',
-  },
-
-  // Modal
-  modal: {
-    position: 'absolute',
-    top: '30%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: 'white',
-    border: 'none',
-    padding: '3rem',
-  },
-  btnGrid: {
-    marginTop: '2rem',
-  },
-  canBtn: {
-    backgroundColor: '#CC0000',
-    color: 'white',
-  },
-  delBtn: {
-    backgroundColor: '#007E33',
-    marginLeft: '4rem',
-    color: 'white',
-  },
-}))
+import useStyles from '../styles/HomeStyleSheet'
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein }
@@ -123,6 +37,9 @@ const rows = [
 const HomeScreen = () => {
   const classes = useStyles()
 
+  const [offsetY, setOffsetY] = useState(0)
+  const handleScroll = () => setOffsetY(window.pageYOffset)
+
   const [open, setOpen] = useState(false)
   const [fileModal, setFOpen] = useState(false)
 
@@ -132,10 +49,19 @@ const HomeScreen = () => {
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <div style={{ height: '100%' }}>
       <Fade key={'Home'} timeout={500} in={true}>
-        <Box className={classes.root}>
+        <Box
+          style={{ transform: `translateY(${offsetY * 0.5}px)` }}
+          className={classes.root}
+        >
           <Container className={classes.filesCont}>
             <Grid container className={classes.headGrid}>
               <Grid item item xs={6}>
@@ -162,10 +88,10 @@ const HomeScreen = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell sx={{ border: 'none' }}>
-                      <Typography variant='subtitle'>Name</Typography>
+                      <Typography variant='subtitle1'>Name</Typography>
                     </TableCell>
                     <TableCell sx={{ border: 'none' }} align='right'>
-                      <Typography variant='subtitle'>Date</Typography>
+                      <Typography variant='subtitle1'>Date</Typography>
                     </TableCell>
                     <TableCell
                       sx={{ border: 'none' }}
@@ -181,7 +107,7 @@ const HomeScreen = () => {
                 <TableBody className={classes.row}>
                   {rows.map((row) => (
                     <TableRow
-                      hover='true'
+                      hover={true}
                       key={row.name}
                       className={classes.row}
                     >
@@ -254,39 +180,3 @@ const HomeScreen = () => {
 }
 
 export default HomeScreen
-
-/*
-
-  <Input
-            className={classes.btnGrid}
-            id='file'
-            type='file'
-            disableUnderline={true}
-          />
-
-
-
-      <Modal open={fileModal} disableBackdropClick>
-        <Box sx={{ minWidth: 500 }} className={classes.modal}>
-         
-
-          <Grid container className={classes.btnGrid}>
-            <Grid item xs={6}>
-              <Button onClick={handleFClose} className={classes.canBtn}>
-                Cancel
-              </Button>
-            </Grid>
-            <Grid item xs={6}>
-              <Button onClick={handleFClose} className={classes.delBtn}>
-                Upload
-              </Button>
-            </Grid>
-          </Grid>
-        </Box>
-      </Modal>
-
-
-
-
-
-*/

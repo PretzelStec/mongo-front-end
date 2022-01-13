@@ -41,7 +41,7 @@ const SignUpScreen = () => {
             <FormControl className={classes.form}>
               <InputLabel>Password</InputLabel>
               <Input
-                InputProps={{
+                inputprops={{
                   style: {
                     focused: 'red',
                   },
