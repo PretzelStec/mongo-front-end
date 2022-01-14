@@ -43,10 +43,10 @@ const SignUpScreen = (location, history) => {
   // Function called on submit
   const submitHandler = (e) => {
     e.preventDefault()
+    dispatch(register(username, email, password))
     if (error) {
       setMessage(error)
     }
-    dispatch(register(username, email, password))
   }
 
   return (
