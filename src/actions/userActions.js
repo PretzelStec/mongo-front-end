@@ -12,7 +12,7 @@ import {
   USER_DETAILS_SUCCESS,
 } from '../constants/userConstants'
 
-export const register = (name, email, password) => async (dispatch) => {
+export const register = (email, password, username) => async (dispatch) => {
   try {
     dispatch({
       type: USER_REGISTER_REQUEST,
@@ -25,7 +25,11 @@ export const register = (name, email, password) => async (dispatch) => {
     }
 
     // ! NEED POST ROUTE ALSO, NAME??? ! //
-    const { data } = await axios.post('', { name, email, password }, config)
+    const { data } = await axios.post(
+      'https://mongo-ht-2022-api.herokuapp.com/signin',
+      { email, password, username },
+      config
+    )
 
     dispatch({
       type: USER_REGISTER_SUCCESS,

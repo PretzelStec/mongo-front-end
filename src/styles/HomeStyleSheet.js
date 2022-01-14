@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
 
   // Container
   filesCont: {
+    textAlign: 'left',
     margin: 'auto',
     marginTop: 60,
     padding: '2rem',
