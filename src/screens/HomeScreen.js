@@ -143,7 +143,7 @@ const HomeScreen = () => {
         </Box>
       </Fade>
 
-      <Modal open={open} disableBackdropClick>
+      <Modal open={open}>
         <Box sx={{ minWidth: 300 }} className={classes.modal}>
           <Typography id='modal-modal-title' variant='h6' component='h2'>
             Are you sure you want to delete?

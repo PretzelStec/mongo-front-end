@@ -1,3 +1,4 @@
+/*global some_unused_var*/
 import React, { useState, useEffect } from 'react'
 import Helmet from 'react-helmet'
 import { Container, Grid, Box, Fade, Modal, Button } from '@material-ui/core'
@@ -43,7 +44,6 @@ const HomeScreen = () => {
   const handleFClose = () => setFOpen(false)
 
   const handleOpen = () => setOpen(true)
-
   const handleClose = () => setOpen(false)
 
   useEffect(() => {
@@ -61,12 +61,12 @@ const HomeScreen = () => {
         >
           <Container className={classes.filesCont}>
             <Grid container className={classes.headGrid}>
-              <Grid item item xs={6}>
+              <Grid item xs={6}>
                 <Typography style={{ textAlign: 'left' }} variant='h6'>
                   Edward Olszeski
                 </Typography>
               </Grid>
-              <Grid item item xs={6}>
+              <Grid item xs={6}>
                 <Typography style={{ textAlign: 'right' }} variant='h6'>
                   Log Out
                 </Typography>
@@ -81,7 +81,7 @@ const HomeScreen = () => {
 
           <Container className={classes.filesCont}>
             {rows.map((row) => (
-              <Grid container>
+              <Grid container key={row.name}>
                 <Grid item xs={11}>
                   <Accordion
                     expanded={expanded === row}
@@ -120,7 +120,7 @@ const HomeScreen = () => {
         </Box>
       </Fade>
 
-      <Modal open={open} disableBackdropClick>
+      <Modal open={open}>
         <Box sx={{ minWidth: 300 }} className={classes.modal}>
           <Typography id='modal-modal-title' variant='h6' component='h2'>
             Are you sure you want to delete?
