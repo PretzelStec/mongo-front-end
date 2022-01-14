@@ -11,6 +11,7 @@ import {
   USER_DETAILS_RESET,
   USER_DETAILS_SUCCESS,
 } from '../constants/userConstants'
+import axios from 'axios'
 
 export const register = (email, password, username) => async (dispatch) => {
   try {

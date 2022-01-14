@@ -7,11 +7,10 @@ import {
   InputLabel,
   Input,
   Button,
+  Box,
 } from '@material-ui/core'
-import Box from '@mui/material/Box'
 import useStyles from '../styles/MainStyleSheet'
 import Fade from '@mui/material/Fade'
-import Slide from '@mui/material/Slide'
 
 const LoginScreen = () => {
   const classes = useStyles()

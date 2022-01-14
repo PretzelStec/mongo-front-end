@@ -7,6 +7,7 @@ import {
   FILE_UPLOAD_FAIL,
   FILE_UPLOAD_REQUEST,
 } from '../constants/fileConstants'
+import axios from 'axios'
 
 export const uploadFile = (file) => async (dispatch, getState) => {
   const formData = new FormData()
