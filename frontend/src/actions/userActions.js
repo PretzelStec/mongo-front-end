@@ -25,9 +25,8 @@ export const register = (email, password, username) => async (dispatch) => {
       },
     }
 
-    // ! NEED POST ROUTE ALSO, NAME??? ! //
     const { data } = await axios.post(
-      'https://mongo-ht-2022-api.herokuapp.com/signin',
+      'https://mongo-ht-2022-api.herokuapp.com/signup',
       { email, password, username },
       config
     )

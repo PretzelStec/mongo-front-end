@@ -44,7 +44,7 @@ const SignUpScreen = (location, history) => {
   const submitHandler = (e) => {
     e.preventDefault()
     if (error) {
-      setMessage(error.message)
+      setMessage(error)
     }
     dispatch(register(username, email, password))
   }
@@ -70,8 +70,25 @@ const SignUpScreen = (location, history) => {
             </Typography>
             <Box className={classes.inputBox}>
               <FormControl className={classes.form}>
+                <InputLabel>User Name</InputLabel>
+                <Input
+                  id='username'
+                  disableUnderline={true}
+                  value={username}
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+              </FormControl>
+            </Box>
+
+            <Box className={classes.inputBox}>
+              <FormControl className={classes.form}>
                 <InputLabel>Email address</InputLabel>
-                <Input id='email address' disableUnderline={true} />
+                <Input
+                  id='email'
+                  disableUnderline={true}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </FormControl>
             </Box>
 
@@ -87,13 +104,17 @@ const SignUpScreen = (location, history) => {
                   id='password'
                   type='password'
                   disableUnderline={true}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </FormControl>
 
               {message && <Message severity='error'>{message}</Message>}
             </Box>
 
-            <Button className={classes.Btn}>Sign Up</Button>
+            <Button className={classes.Btn} onClick={submitHandler}>
+              Sign Up
+            </Button>
 
             <Typography className={classes.newUse}>
               Already have an account?
