@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import reportWebVitals from './reportWebVitals'
 import './index.css'
 import store from './store'
 import { Provider } from 'react-redux'
+import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -13,4 +13,4 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-reportWebVitals()
+serviceWorker.unregister()
